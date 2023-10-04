@@ -1,0 +1,6 @@
+﻿  main.cpp
+C:\Users\utente\Desktop\uni\3 anno\Computer Graphics\ComputerGraphics-lab\Luna\Luna\main.cpp(26,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\utente\Desktop\uni\3 anno\Computer Graphics\ComputerGraphics-lab\Luna\Luna\main.cpp(35,20): warning C4018: '<=': signed/unsigned mismatch
+  ShaderMaker.cpp
+  Generating Code...
+  Luna.vcxproj -> C:\Users\utente\Desktop\uni\3 anno\Computer Graphics\ComputerGraphics-lab\Luna\Debug\Luna.exe
