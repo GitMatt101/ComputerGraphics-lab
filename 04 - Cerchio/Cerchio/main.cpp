@@ -10,8 +10,8 @@ static unsigned int programId;
 unsigned int VBO;
 unsigned int VAO;
 
-unsigned int nTriangles = 50;	// Più triangoli uso, più il cerchio sarà tondo
-unsigned int nVertices = nTriangles + 2;
+unsigned int nTriangles = 50;			// Più triangoli uso, più il cerchio sarà tondo
+unsigned int nVertices = nTriangles + 2;	// Deve collegare anche il centro e l'ultimo vertice
 
 // Struct di un vertice (pixel)
 typedef struct {
