@@ -49,9 +49,11 @@ void INIT_VAO(void)
 	// Configurazione dei colori (stride = 4 -> r, g, b, a)
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(1);
+
+	glBindVertexArray(0);		// Disattiva il VAO
 }
 
-// Disegna i punti sulla finestra creata
+// Funzione di call-back: funzione che viene chiamata ogni volta che si deve disegnare qualcosa a schermo
 void drawScene(void)
 {
 	glClearColor(0.0, 0.0, 0.0, 1.0);	// Specifica il colore che la finestra deve assumere quando viene resettata
@@ -71,7 +73,7 @@ int main(int argc, char* argv[])
 	glutInitWindowSize(700, 700);					// Imposta la dimensione della finestra (pixel x pixel)
 	glutInitWindowPosition(400, 50);				// Imposta la distanza dall'angolo in alto a sinistra dello schermo
 	glutCreateWindow("Triangolo OpenGL");			// Crea una finestra sullo schermo e gli dà un titolo
-	glutDisplayFunc(drawScene);
+	glutDisplayFunc(drawScene);						// Imposta la funzione di call-back
 	glewExperimental = GL_TRUE;
 	glewInit();
 	gestisci_shader();

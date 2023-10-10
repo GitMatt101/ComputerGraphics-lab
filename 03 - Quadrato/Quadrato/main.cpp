@@ -26,7 +26,6 @@ unsigned int EBO;	// Element Buffer Object - contiene le informazioni per colleg
 	per unire i punti con delle linee.
 */
 float vertices[] = {
-	// posizioni
 	-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,	// vertice in basso a sinistra (rosso)
 	-0.5f, 0.5f, 0.0f,  1.0f, 1.0f, 1.0f, 1.0f,	// vertice in basso a destra (bianco)
 	0.5f, 0.5, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,	// vertice in alto a destra (rosso)
@@ -67,17 +66,19 @@ void INIT_VAO(void)
 	glGenBuffers(1, &EBO);	// Creo un EBO all'interno del VAO
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);		// Faccio il bind
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);	// Carico i dati degli indici sul buffer
+
+	glBindVertexArray(0);		// Disattivo il VAO
 }
 
-// Disegna i punti sulla finestra creata
+// Funzione di call-back: funzione che viene chiamata ogni volta che si deve disegnare qualcosa a schermo
 void drawScene(void)
 {
-	glClearColor(0.0, 0.0, 0.0, 1.0);	// Specifica il colore che la finestra deve assumere quando viene resettata
-	glClear(GL_COLOR_BUFFER_BIT);		// Pulisce il buffer del colore e setta il colore a quello definito prima
-	glBindVertexArray(VAO);				// Attiva il VAO
+	glClearColor(0.0, 0.0, 0.0, 1.0);						// Specifica il colore che la finestra deve assumere quando viene resettata
+	glClear(GL_COLOR_BUFFER_BIT);							// Pulisce il buffer del colore e setta il colore a quello definito prima
+	glBindVertexArray(VAO);									// Attiva il VAO
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);	// Disegna i triangoli avendo, in totale, 6 vertici
-	glBindVertexArray(0);				// Disattiva il VAO
-	glutSwapBuffers();					// Swap tra il front e back frame buffer durante l'animazione
+	glBindVertexArray(0);									// Disattiva il VAO
+	glutSwapBuffers();										// Swap tra il front e back frame buffer durante l'animazione
 }
 
 int main(int argc, char* argv[])
@@ -89,7 +90,7 @@ int main(int argc, char* argv[])
 	glutInitWindowSize(800, 800);					// Imposta la dimensione della finestra (pixel x pixel)
 	glutInitWindowPosition(100, 100);				// Imposta la distanza dall'angolo in alto a sinistra dello schermo
 	glutCreateWindow("Triangolo OpenGL");			// Crea una finestra sullo schermo e gli dà un titolo
-	glutDisplayFunc(drawScene);
+	glutDisplayFunc(drawScene);						// Imposta la funzione di call-back
 	glewExperimental = GL_TRUE;
 	glewInit();
 	gestisci_shader();

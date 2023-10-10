@@ -1,4 +1,6 @@
 ﻿  main.cpp
-C:\Users\utente\Desktop\uni\3 anno\Computer Graphics\ComputerGraphics-lab\Cerchio\Cerchio\main.cpp(25,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\utente\Desktop\uni\3 anno\Computer Graphics\ComputerGraphics-lab\Cerchio\Cerchio\main.cpp(34,20): warning C4018: '<=': signed/unsigned mismatch
-  Cerchio.vcxproj -> C:\Users\utente\Desktop\uni\3 anno\Computer Graphics\ComputerGraphics-lab\Cerchio\x64\Debug\Cerchio.exe
+C:\Users\mattia.forti2\Desktop\ComputerGraphics-lab\04 - Cerchio\Cerchio\main.cpp(26,13): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\mattia.forti2\Desktop\ComputerGraphics-lab\04 - Cerchio\Cerchio\main.cpp(34,20): warning C4018: '<=': errata corrispondenza tra signed e unsigned
+  ShaderMaker.cpp
+  Generazione del codice in corso...
+  Cerchio.vcxproj -> C:\Users\mattia.forti2\Desktop\ComputerGraphics-lab\04 - Cerchio\x64\Debug\Cerchio.exe

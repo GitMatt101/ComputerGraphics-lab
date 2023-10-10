@@ -31,17 +31,15 @@ void drawCircle(float cx, float cy, float rx, float ry, Vertex* circle) {
 	circle[0].g = 0.0f;
 	circle[0].b = 0.0f;
 	circle[0].a = 1.0f;
-	unsigned int count = 1;
 	for (int i = 0; i <= nVertices; i++) {
 		float theta_i = (float)i * step;
-		circle[count].x = cx + rx * (sin(theta_i) * exp(cos(theta_i) - 2 * cos(4 * theta_i)) + pow(sin(theta_i / 12), 3));
-		circle[count].y = cy + ry * (cos(theta_i) * exp(cos(theta_i) - 2 * cos(4 * theta_i)) - pow(sin(theta_i / 12), 3));
-		circle[count].z = 0;
-		circle[count].r = 1.0f;
-		circle[count].g = 0.0f;
-		circle[count].b = 0.0f;
-		circle[count].a = 1.0f;
-		count++;
+		circle[i + 1].x = cx + rx * (sin(theta_i) * exp(cos(theta_i) - 2 * cos(4 * theta_i)) + pow(sin(theta_i / 12), 3));
+		circle[i + 1].y = cy + ry * (cos(theta_i) * exp(cos(theta_i) - 2 * cos(4 * theta_i)) - pow(sin(theta_i / 12), 3));
+		circle[i + 1].z = 0;
+		circle[i + 1].r = 1.0f;
+		circle[i + 1].g = 0.0f;
+		circle[i + 1].b = 0.0f;
+		circle[i + 1].a = 1.0f;
 	}
 }
 
@@ -71,17 +69,19 @@ void INIT_VAO(void)
 	// Configurazione dei colori (stride = 4 -> r, g, b, a)
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
+
+	glBindVertexArray(0);		// Disattiva il VAO
 }
 
-// Disegna i punti sulla finestra creata
+// Funzione di call-back: funzione che viene chiamata ogni volta che si deve disegnare qualcosa a schermo
 void drawScene(void)
 {
-	glBindVertexArray(0);				// Disattiva il VAO
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);	// Specifica il colore che la finestra deve assumere quando viene resettata
-	glClear(GL_COLOR_BUFFER_BIT);		// Pulisce il buffer del colore e setta il colore a quello definito prima
-	glBindVertexArray(VAO);				// Attiva il VAO
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);			// Specifica il colore che la finestra deve assumere quando viene resettata
+	glClear(GL_COLOR_BUFFER_BIT);					// Pulisce il buffer del colore e setta il colore a quello definito prima
+	glBindVertexArray(VAO);							// Attiva il VAO
 	glDrawArrays(GL_TRIANGLE_FAN, 0, nVertices);	// Disegna li triangoli
-	glutSwapBuffers();					// Swap tra il front e back frame buffer durante l'animazione
+	glBindVertexArray(0);							// Disattiva il VAO
+	glutSwapBuffers();								// Swap tra il front e back frame buffer durante l'animazione
 }
 
 int main(int argc, char* argv[])
@@ -93,7 +93,7 @@ int main(int argc, char* argv[])
 	glutInitWindowSize(700, 700);					// Imposta la dimensione della finestra (pixel x pixel)
 	glutInitWindowPosition(400, 50);				// Imposta la distanza dall'angolo in alto a sinistra dello schermo
 	glutCreateWindow("Triangolo OpenGL");			// Crea una finestra sullo schermo e gli dà un titolo
-	glutDisplayFunc(drawScene);
+	glutDisplayFunc(drawScene);						// Imposta la funzione di call-back
 	glewExperimental = GL_TRUE;
 	glewInit();
 	gestisci_shader();

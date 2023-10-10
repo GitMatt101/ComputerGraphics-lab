@@ -10,9 +10,9 @@ unsigned int VAO; // Vertex Array Object - contiene i VBO
 
 // Coordinate normalizzate dei vertici
 float vertices[] = {
-	-0.5f, -0.5f, 0.0f,  // vertice in basso a sinistra
-	0.5f, -0.5f, 0.0f,  // vertice in basso a destra
-	0.0f,  0.5f, 0.0f // vertice in alto 
+	-0.5f, -0.5f, 0.0f,		// vertice in basso a sinistra
+	0.5f, -0.5f, 0.0f,		// vertice in basso a destra
+	0.0f, 0.5f, 0.0f		// vertice in alto 
 };
 
 void gestisci_shader(void) {
@@ -45,9 +45,11 @@ void INIT_VAO(void)
 	*/
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);	// Abilita l'attributo del vertice (sono quelli di prima)
+
+	glBindVertexArray(0);		// Disattiva il VAO
 }
 
-// Disegna i punti sulla finestra creata
+// Funzione di call-back: funzione che viene chiamata ogni volta che si deve disegnare qualcosa a schermo
 void drawScene(void)
 {
 	glClearColor(0.0, 0.0, 0.0, 1.0);	// Specifica il colore che la finestra deve assumere quando viene resettata
@@ -67,7 +69,7 @@ int main(int argc, char* argv[])
 	glutInitWindowSize(800, 800);					// Imposta la dimensione della finestra (pixel x pixel)
 	glutInitWindowPosition(100, 100);				// Imposta la distanza dall'angolo in alto a sinistra dello schermo
 	glutCreateWindow("Triangolo OpenGL");			// Crea una finestra sullo schermo e gli dà un titolo
-	glutDisplayFunc(drawScene);
+	glutDisplayFunc(drawScene);						// Imposta la funzione di call-back
 	glewExperimental = GL_TRUE;
 	glewInit();
 	gestisci_shader();
