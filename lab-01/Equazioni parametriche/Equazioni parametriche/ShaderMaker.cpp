@@ -1,5 +1,4 @@
-
-#include "ShaderMaker.h"
+#include "shaderMaker.h"
 #include <iostream>
 #include <fstream>
 
@@ -29,21 +28,19 @@ GLuint ShaderMaker::createProgram(char* vertexfilename, char *fragmentfilename)
 	int success;
 	char infoLog[512];
 
-
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 
 	// Creiamo gli eseguibili degli shader
-	//Leggiamo il codice del Vertex Shader
+	// Leggiamo il codice del Vertex Shader
 	GLchar* VertexShader = readShaderSource(vertexfilename);
-	//Visualizzo sulla console il CODICE VERTEX SHADER
-	//cout << VertexShader;
+	// Visualizzo sulla console il CODICE VERTEX SHADER
 
-	//Generiamo un identificativo per il vertex shader
+	// Generiamo un identificativo per il vertex shader
 	GLuint vertexShaderId = glCreateShader(GL_VERTEX_SHADER);
-	//Associamo all'identificativo il codice del vertex shader
+	// Associamo all'identificativo il codice del vertex shader
 	glShaderSource(vertexShaderId, 1, (const char**)&VertexShader, NULL);
-	//Compiliamo il Vertex SHader
-	glCompileShader(vertexShaderId); 
+	// Compiliamo il Vertex SHader
+	glCompileShader(vertexShaderId);
 	
 	glGetShaderiv(vertexShaderId, GL_COMPILE_STATUS, &success);
 	if (!success) {

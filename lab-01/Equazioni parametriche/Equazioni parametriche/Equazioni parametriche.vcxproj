@@ -19,21 +19,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ShaderMaker.cpp" />
-    <ClCompile Include="TriangoloOpengl.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Lib.h" />
-    <ClInclude Include="ShaderMaker.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cerchio.cpp" />
+    <ClCompile Include="ShaderMaker.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="lib.h" />
+    <ClInclude Include="shaderMaker.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{2f73bc7c-6aca-47d0-bf50-450ee87255e4}</ProjectGuid>
-    <RootNamespace>Triangolo</RootNamespace>
+    <ProjectGuid>{2d34fd45-a372-4ede-9bc5-03cd3914bf40}</ProjectGuid>
+    <RootNamespace>Equazioniparametriche</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

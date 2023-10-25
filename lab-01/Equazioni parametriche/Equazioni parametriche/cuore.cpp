@@ -17,30 +17,27 @@ unsigned int nVertices = nTriangles + 2;	// Deve collegare anche il centro e l'u
 typedef struct {
 	float x, y, z, r, g, b, a;
 } Vertex;
-Vertex* circle = new Vertex[nVertices];
+Vertex* heart = new Vertex[nVertices];		// Una figura è un insieme di vertici collegati da linee
 
 // Disegna un cuore
-// x(theta) = cx + raggiox * 16 * sin^3(theta)
-// y(theta) = cy + raggioy * (13 * cos(theta) - 5 * cos(2 * theta) - 2 * cos(3 * theta) - cos(4 * theta))
-// NOTA: modificare il 16 cambia la larghezza, mentre modificare il 13 cambia l'altezza
-void drawCircle(float cx, float cy, float rx, float ry, Vertex* circle) {
+void drawHeart(float cx, float cy, float rx, float ry, Vertex* heart) {
 	float step = 2 * PI / nTriangles;	// Angolo progressivo per disegnare i triangoli
-	circle[0].x = cx;
-	circle[0].y = cy;
-	circle[0].z = 0;
-	circle[0].r = 1.0f;
-	circle[0].g = 0.0f;
-	circle[0].b = 1.0f;
-	circle[0].a = 1.0f;
+	heart[0].x = cx;
+	heart[0].y = cy;
+	heart[0].z = 0;
+	heart[0].r = 1.0f;
+	heart[0].g = 0.0f;
+	heart[0].b = 1.0f;
+	heart[0].a = 1.0f;
 	for (int i = 0; i <= nVertices; i++) {
 		float theta_i = (float)i * step;
-		circle[i + 1].x = cx + rx * 16 * pow(sin(theta_i), 3);
-		circle[i + 1].y = cy + ry * (13 * cos(theta_i) - 5 * cos(2 * theta_i) - 2 * cos(3 * theta_i) - cos(4 * theta_i));
-		circle[i + 1].z = 0;
-		circle[i + 1].r = 1.0f;
-		circle[i + 1].g = 0.0f;
-		circle[i + 1].b = 0.0f;
-		circle[i + 1].a = 1.0f;
+		heart[i + 1].x = cx + rx * 16 * pow(sin(theta_i), 3);
+		heart[i + 1].y = cy + ry * (13 * cos(theta_i) - 5 * cos(2 * theta_i) - 2 * cos(3 * theta_i) - cos(4 * theta_i));
+		heart[i + 1].z = 0;
+		heart[i + 1].r = 1.0f;
+		heart[i + 1].g = 0.0f;
+		heart[i + 1].b = 0.0f;
+		heart[i + 1].a = 1.0f;
 	}
 }
 
@@ -55,13 +52,13 @@ void gestisci_shader(void) {
 // Inizializza il VAO
 void INIT_VAO(void)
 {
-	drawCircle(0.0f, 0.0f, 0.05f, 0.05f, circle);
+	drawHeart(0.0f, 0.0f, 0.05f, 0.05f, heart);
 	glGenVertexArrays(1, &VAO);	// Creo il VAO
 	glBindVertexArray(VAO);		// Faccio il bind (lo collego e lo attivo)
 
 	glGenBuffers(1, &VBO);		// Creo un VBO per le posizioni all'interno del VAO
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);	// Faccio il bind (lo collego e lo attivo assegnadogli il tipo GL_ARRAY_BUFFER)
-	glBufferData(GL_ARRAY_BUFFER, nVertices * sizeof(Vertex), &circle[0], GL_STATIC_DRAW);	// Carico i dati dei vertici sulla GPU
+	glBufferData(GL_ARRAY_BUFFER, nVertices * sizeof(Vertex), &heart[0], GL_STATIC_DRAW);	// Carico i dati dei vertici sulla GPU
 
 	// Configurazione delle posizioni (stride = 3 -> x, y, z)
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)0);
