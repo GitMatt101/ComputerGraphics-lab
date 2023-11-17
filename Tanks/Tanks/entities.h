@@ -18,7 +18,7 @@ enum Direction {
 
 class Entity {
 
-	private:
+	protected:
 		GLuint VAO;
 		GLuint VBO_V;
 		GLuint VBO_C;
@@ -28,7 +28,8 @@ class Entity {
 		vector<vec4> cpColors;		// Colori dei punti di controllo
 		int nCP;					// Numero massimo di punti di controllo (punti di interpolazione)
 		mat4 model;					// Matrice di modellazione: traslazione * rotazione * scala
-		float shiftValue;			// Valore di traslazione
+		float xShiftValue;			// Valore di traslazione per la x
+		float yShiftValue;			// Valore di traslazione per la y
 		float scaleValue;			// Valore di scalatura
 		float rotationValue;		// Valore di rotazione
 
@@ -47,7 +48,8 @@ class Entity {
 		int getNumberOfVertices();
 		int getNumberOfControlPoints();
 		mat4* getModel();
-		float getShiftValue();
+		float getXShiftValue();
+		float getYShiftValue();
 		float getScaleValue();
 		float getRotationValue();
 

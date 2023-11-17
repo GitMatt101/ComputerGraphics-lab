@@ -76,9 +76,14 @@ mat4* Entity::getModel()
 	return &model;
 }
 
-float Entity::getShiftValue()
+float Entity::getXShiftValue()
 {
-	return shiftValue;
+	return xShiftValue;
+}
+
+float Entity::getYShiftValue()
+{
+	return yShiftValue;
 }
 
 float Entity::getScaleValue()
@@ -97,6 +102,10 @@ Player::Player()
 {
 	alive = true;
 	direction = RIGHT;
+	xShiftValue = 0.0f;
+	yShiftValue = 0.0f;
+	scaleValue = 1.0f;
+	rotationValue = 0.0f;
 }
 
 Direction Player::getDirection()

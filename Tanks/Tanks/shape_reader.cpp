@@ -10,9 +10,9 @@ typedef struct
 	float z;
 } Vertex;
 
-void create_shape_from_file(char* file_name, Shape* shape, Shape* d)
+void create_shape_from_file(char* fileName, Shape* shape, Shape* d)
 {
-	FILE* file = fopen(file_name, "r");
+	FILE* file = fopen(fileName, "r");
 	if (file == NULL)
 		perror("Impossibile aprire il file");
 
@@ -30,4 +30,20 @@ void create_shape_from_file(char* file_name, Shape* shape, Shape* d)
 		shape->cpCoordinates.push_back(vec3(data[i].x, data[i].y, data[i].z));
 		d->cpCoordinates.push_back(vec3(0.0f, 0.0f, 0.0f));
 	}
+}
+
+vector<vec3> readPolygonVertices(char* fileName)
+{
+	FILE* file = fopen(fileName, "r");
+	if (file == NULL)
+		perror("Impossibile aprire il file");
+
+	vector<vec3> data;	// Vettore per memorizzare i vertici della figura
+
+	float x, y, z;
+	for (int riga = 0; fscanf(file, "%f %f %f", &x, &y, &z) == 3 && riga < MAX_DATA; riga++)
+		data.push_back(vec3(x, y, z));
+
+	fclose(file);		// Chiudi il file
+	return data;
 }

@@ -22,6 +22,7 @@
     <ClCompile Include="entities.cpp" />
     <ClCompile Include="geometry.cpp" />
     <ClCompile Include="hermite.cpp" />
+    <ClCompile Include="interactions.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ShaderMaker.cpp" />
     <ClCompile Include="shape_reader.cpp" />
@@ -31,6 +32,7 @@
     <ClInclude Include="entities.h" />
     <ClInclude Include="geometry.h" />
     <ClInclude Include="hermite.h" />
+    <ClInclude Include="interactions.h" />
     <ClInclude Include="lib.h" />
     <ClInclude Include="ShaderMaker.h" />
     <ClInclude Include="shape_reader.h" />
