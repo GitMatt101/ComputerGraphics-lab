@@ -3,6 +3,7 @@
 Shape::Shape(char* name, vector<Vertex> vertices) {
 	this->name = name;
 	this->vertices = vertices;
+	this->selected = false;
 }
 
 char* Shape::getName() {
@@ -31,4 +32,20 @@ GLuint* Shape::getColorsVBO() {
 
 GLuint* Shape::getEBO() {
 	return &(this->EBO);
+}
+
+vec4* Shape::getAnchor() {
+	return &(this->anchor);
+}
+
+float Shape::getSphereRadius() {
+	return this->sphereRadius;
+}
+
+bool Shape::isSelected() {
+	return this->selected;
+}
+
+void Shape::toggleSelection() {
+	this->selected = !this->selected;
 }

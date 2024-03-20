@@ -24,13 +24,16 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="source_files\geometry.cpp" />
+    <ClCompile Include="source_files\interactions.cpp" />
     <ClCompile Include="source_files\shape.cpp" />
     <ClCompile Include="source_files\VAO_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header_files\geometry.h" />
+    <ClInclude Include="header_files\interactions.h" />
     <ClInclude Include="header_files\shape.h" />
     <ClInclude Include="header_files\VAO_manager.h" />
+    <ClInclude Include="header_files\view.h" />
     <ClInclude Include="lib.h" />
     <ClInclude Include="utilities.h" />
   </ItemGroup>

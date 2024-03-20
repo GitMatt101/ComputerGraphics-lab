@@ -13,6 +13,9 @@ class Shape {
 		GLuint VBO_V;
 		GLuint VBO_C;
 		GLuint EBO;
+		vec4 anchor;
+		float sphereRadius;
+		bool selected;
 
 	public:
 		/*
@@ -71,5 +74,31 @@ class Shape {
 		* @return The pointer to the EBO of the shape.
 		*/
 		GLuint* getEBO();
+
+		/*
+		* Retrieves the anchor of the shape.
+		* 
+		* @return The pointer to the anchor of the shape.
+		*/
+		vec4* getAnchor();
+
+		/*
+		* Retrieves the radius of the sphere that contains the shape.
+		* 
+		* @return The radius of the sphere.
+		*/
+		float getSphereRadius();
+
+		/*
+		* Checks if the shape is selected.
+		* 
+		* @return True if the shape is selected, false otherwise.
+		*/
+		bool isSelected();
+
+		/*
+		* If the shape is not selected, it sets selected to true, otherwise it sets it to false.
+		*/
+		void toggleSelection();
 
 };
