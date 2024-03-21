@@ -1,9 +1,10 @@
 #include "../header_files/shape.h"
 
-Shape::Shape(char* name, vector<Vertex> vertices) {
+Shape::Shape(char* name, vector<Vertex> vertices, float sphereRadius) {
 	this->name = name;
 	this->vertices = vertices;
 	this->selected = false;
+	this->sphereRadius = sphereRadius;
 }
 
 char* Shape::getName() {

@@ -6,7 +6,7 @@
 
 vector<Shape*> scene;
 View camera;
-Perspective perspective;
+Perspective cameraPerspective;
 
 mat4 projectionMatrix;
 mat4 projectionMatrix_text;

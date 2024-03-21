@@ -8,7 +8,7 @@
 #define PI 3.14159265358979323846
 
 // Enum used to identify the working axis.
-#define AXIS { X, Y, Z, NONE }
+const enum Axis { X, Y, Z, NONE }
 
 // Enum used to identify the current transformation in use.
-#define TRANSFORMATION { TRASLATION, ROTATION, SCALE, NONE }
+const enum Transformation { TRANSLATION, ROTATION, SCALE, NONE };

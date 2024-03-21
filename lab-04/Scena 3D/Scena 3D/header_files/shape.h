@@ -23,8 +23,9 @@ class Shape {
 		* 
 		* @param name - The name of the shape.
 		* @param vertices - The vertices thay build the shape.
+		* @param sphereRadius - The radius of the sphere that contains the shape.
 		*/
-		Shape(char* name, vector<Vertex> vertices);
+		Shape(char* name, vector<Vertex> vertices, float sphereRadius);
 
 		/*
 		* Retrieves the name of the shape.
