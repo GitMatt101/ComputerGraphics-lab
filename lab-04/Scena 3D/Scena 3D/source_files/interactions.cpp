@@ -2,14 +2,21 @@
 #include "../header_files/interactions.h"
 #include "../header_files/shape.h"
 #include "../header_files/view.h"
+#include "../header_files/camera.h"
+
+// Enum used to identify the working axis.
+const enum Axis { X, Y, Z, NONE };
+
+// Enum used to identify the current transformation in use.
+const enum Transformation { TRANSLATION, ROTATION, SCALE, NONE };
 
 extern vector<Shape*> scene;
 extern View camera;
 extern Perspective cameraPerspective;
 extern mat4 projectionMatrix;
 extern mat4 view;
-extern Transformation currentTransformation;
-extern Axis currentAxis;
+Axis currentAxis = Axis::NONE;
+Transformation currentTransformation = Transformation::NONE;
 
 /*
 * Calculates the ray that starts from the camera and reaches the clicked point on the screen, transforming it in world coordinates.
@@ -56,16 +63,22 @@ void keyboardEvent(unsigned char key, int x, int y) {
 
 	switch (key) {
 		case 'w':	// Forward
+			moveCameraForward();
 			break;
 		case 'a':	// Left
+			moveCameraLeft();
 			break;
 		case 's':	// Backward
+			moveCameraBackward();
 			break;
 		case 'd':	// Right
+			moveCameraRight();
 			break;
-		case 'q':	// Up
+		case 'e':	// Upward
+			moveCameraUpward();
 			break;
-		case 'e':	// Down
+		case 'q':	// Downward
+			moveCameraDownward();
 			break;
 		case 'x':	// X axis
 			currentAxis = X;
