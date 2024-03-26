@@ -1,18 +1,26 @@
 #include "../header_files/shape.h"
 
-Shape::Shape(char* name, vector<Vertex> vertices, float sphereRadius) {
+Shape::Shape(string name, vector<Vertex> vertices, vector<GLuint> indexes, float sphereRadius) {
 	this->name = name;
 	this->vertices = vertices;
+	this->indexes = indexes;
 	this->selected = false;
 	this->sphereRadius = sphereRadius;
+	this->model = mat4(1.0f);
+	this->anchorObj = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+	this->anchorWorld = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
-char* Shape::getName() {
+string Shape::getName() {
 	return this->name;
 }
 
 vector<Vertex>* Shape::getVertices() {
 	return &(this->vertices);
+}
+
+vector<GLuint>* Shape::getIndexes() {
+	return &(this->indexes);
 }
 
 mat4* Shape::getModel() {
@@ -35,8 +43,12 @@ GLuint* Shape::getEBO() {
 	return &(this->EBO);
 }
 
-vec4* Shape::getAnchor() {
-	return &(this->anchor);
+vec4* Shape::getAnchorObj() {
+	return &(this->anchorObj);
+}
+
+vec4* Shape::getAnchorWorld() {
+	return &(this->anchorWorld);
 }
 
 float Shape::getSphereRadius() {

@@ -3,20 +3,18 @@
 #include "../header_files/shape.h"
 #include "../header_files/view.h"
 #include "../header_files/camera.h"
-
-// Enum used to identify the working axis.
-const enum Axis { X, Y, Z, NONE };
-
-// Enum used to identify the current transformation in use.
-const enum Transformation { TRANSLATION, ROTATION, SCALE, NONE };
+#include <iostream>
+using namespace std;
 
 extern vector<Shape*> scene;
 extern View camera;
 extern Perspective cameraPerspective;
 extern mat4 projectionMatrix;
 extern mat4 view;
-Axis currentAxis = Axis::NONE;
-Transformation currentTransformation = Transformation::NONE;
+extern string transformation;
+extern string workingAxis;
+Axis currentAxis = X;
+Transformation currentTransformation = TRANSLATION;
 
 /*
 * Calculates the ray that starts from the camera and reaches the clicked point on the screen, transforming it in world coordinates.
@@ -59,7 +57,6 @@ void keyboardEvent(unsigned char key, int x, int y) {
 	Shape* selectedShape = NULL;
 	for (Shape* shape : scene)
 		if (shape->isSelected()) selectedShape = shape;
-	if (selectedShape == NULL) return;
 
 	switch (key) {
 		case 'w':	// Forward
@@ -82,31 +79,40 @@ void keyboardEvent(unsigned char key, int x, int y) {
 			break;
 		case 'x':	// X axis
 			currentAxis = X;
+			workingAxis = "X";
 			break;
 		case 'y':	// Y axis
 			currentAxis = Y;
+			workingAxis = "Y";
 			break;
 		case 'z':	// Z axis
 			currentAxis = Z;
+			workingAxis = "Z";
 			break;
 		case 'T':	// Translation
 			currentTransformation = TRANSLATION;
+			transformation = "Translation";
 			break;
 		case 'R':	// Rotation
 			currentTransformation = ROTATION;
+			transformation = "Rotation";
 			break;
 		case 'S':	// Scale
 			currentTransformation = SCALE;
+			transformation = "Scale";
 			break;
 		case '+':	// Increase
-			applyTransformation(selectedShape, 0.05f);
+			if (selectedShape != NULL)
+				applyTransformation(selectedShape, 0.05f);
 			break;
 		case '-':	// Decrease
-			applyTransformation(selectedShape, -0.05f);
+			if (selectedShape != NULL)
+				applyTransformation(selectedShape, -0.05f);
 			break;
 		default:
 			break;
 	}
+	glutPostRedisplay();
 }
 
 void zoom(int button, int direction, int x, int y) {
@@ -121,14 +127,17 @@ void zoom(int button, int direction, int x, int y) {
 }
 
 void select(int button, int state, int x, int y) {
-	if (button != GLUT_LEFT_BUTTON) return;
+	if (button != GLUT_LEFT_BUTTON || state != GLUT_DOWN) return;
 
 	vec3 ray = getRay(x, y);
 	double closestIntersection = 0.0f;
 	Shape* previousIntersectedShape = NULL;
+	for (Shape* shape : scene)
+		if (shape->isSelected()) shape->toggleSelection();
+
 	for (Shape* shape : scene) {
 		double intersectionDistance = getIntersectionDistance(camera.position, ray, shape);
-		if (intersectionDistance > 0.0f && intersectionDistance < closestIntersection) {
+		if (intersectionDistance > 0.0f && (intersectionDistance < closestIntersection || previousIntersectedShape == NULL)) {
 			if (previousIntersectedShape != NULL) 
 				previousIntersectedShape->toggleSelection();
 			shape->toggleSelection();
@@ -146,7 +155,7 @@ vec3 getRay(int x, int y) {
 	vec4 clipCoordinates = vec4(ndc.x, ndc.y, ndc.z, 1.0f);
 	// View coordinates
 	vec4 viewCoordinates = inverse(projectionMatrix) * clipCoordinates;
-	// ViewModelp.w = 1.0; ?
+	viewCoordinates.w = 1.0;
 	// World coordinates
 	vec4 worldCoordinates = inverse(view) * viewCoordinates;
 	// Direction of the ray that starts from the camera and reaches the clicked point
@@ -156,7 +165,7 @@ vec3 getRay(int x, int y) {
 }
 
 double getIntersectionDistance(vec3 origin, vec3 direction, Shape* shape) {
-	vec3 sphereCenter = vec3(shape->getAnchor()->x, shape->getAnchor()->y, shape->getAnchor()->z);
+	vec3 sphereCenter = vec3(shape->getAnchorWorld()->x, shape->getAnchorWorld()->y, shape->getAnchorWorld()->z);
 	float b = dot(direction, (origin - sphereCenter));
 	double q = dot((origin - sphereCenter), (origin - sphereCenter)) - pow(shape->getSphereRadius(), 2);
 	double delta = pow(b, 2) - q;
@@ -174,8 +183,6 @@ void modifyModelMatrix(Shape* shape, vec3 translationVector, vec3 rotationVector
 	mat4 rotationMatrix = rotate(mat4(1), rotationAngle, rotationVector);
 
 	*shape->getModel() = *shape->getModel() * scaleMatrix * rotationMatrix * traslationMatrix;
-
-	glutPostRedisplay();
 }
 
 void applyTransformation(Shape* shape, float transformationValue) {
@@ -207,6 +214,4 @@ void applyTransformation(Shape* shape, float transformationValue) {
 		default:
 			return;
 	}
-
-	glutPostRedisplay();
 }

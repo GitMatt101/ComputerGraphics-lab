@@ -1,6 +1,12 @@
 #pragma once
 #include "../lib.h"
 
+// Enum used to identify the working axis.
+const enum Axis { X, Y, Z };
+
+// Enum used to identify the current transformation in use.
+const enum Transformation { TRANSLATION, ROTATION, SCALE };
+
 /*
 * Handles all keyboard events.
 * 

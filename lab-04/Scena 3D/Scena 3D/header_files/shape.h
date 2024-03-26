@@ -6,14 +6,16 @@
 class Shape {
 
 	private:
-		char* name;
+		string name;
 		vector<Vertex> vertices;
+		vector <GLuint> indexes;
 		mat4 model;
 		GLuint VAO;
 		GLuint VBO_V;
 		GLuint VBO_C;
 		GLuint EBO;
-		vec4 anchor;
+		vec4 anchorObj;
+		vec4 anchorWorld;
 		float sphereRadius;
 		bool selected;
 
@@ -25,14 +27,14 @@ class Shape {
 		* @param vertices - The vertices thay build the shape.
 		* @param sphereRadius - The radius of the sphere that contains the shape.
 		*/
-		Shape(char* name, vector<Vertex> vertices, float sphereRadius);
+		Shape(string name, vector<Vertex> vertices, vector<GLuint> indexes, float sphereRadius);
 
 		/*
 		* Retrieves the name of the shape.
 		* 
 		* @return The name of the shape.
 		*/
-		char* getName();
+		string getName();
 
 		/*
 		* Retrieves the vertices of the shape.
@@ -40,6 +42,13 @@ class Shape {
 		* @return The pointer to the vertices of the shape.
 		*/
 		vector<Vertex>* getVertices();
+
+		/*
+		* Retrieves the indexes of the shape.
+		*
+		* @return The pointer to the indexes of the shape.
+		*/
+		vector<GLuint>* getIndexes();
 
 		/*
 		* Retrieves the model matrix of the shape.
@@ -81,7 +90,14 @@ class Shape {
 		* 
 		* @return The pointer to the anchor of the shape.
 		*/
-		vec4* getAnchor();
+		vec4* getAnchorObj();
+
+		/*
+		* Retrieves the anchor in world coordinates (pixels) of the shape.
+		*
+		* @return The pointer to the anchor of the shape.
+		*/
+		vec4* getAnchorWorld();
 
 		/*
 		* Retrieves the radius of the sphere that contains the shape.

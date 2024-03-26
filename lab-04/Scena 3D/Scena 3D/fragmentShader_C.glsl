@@ -3,8 +3,8 @@ in vec4 ourColor;
 out vec4 FragColor;  
 
 //uniform int scelta;
- uniform float time;
- uniform vec2 resolution;
+uniform float time;
+uniform vec2 resolution;
 int scelta=1;
 #define pi 3.14159235659
 void main()

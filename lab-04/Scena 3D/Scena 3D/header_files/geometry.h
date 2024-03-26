@@ -30,10 +30,11 @@ struct Vertex {
 * @param width - The width of the shape.
 * @param height - The height of the shape.
 * @param depth - The depth of the shape.
-* @param color - The color of the shape.
-* @return A vector of vertices.
+* @param color1 - The first color of the shape.
+* @param color2 - The second color of the shape.
+* @return A vector of vertices and a vector of indexes.
 */
-vector<Vertex> createCuboid(float width, float height, float depth, vec4 color);
+pair<vector<Vertex>, vector<GLuint>> createCuboid(float width, float height, float depth, vec4 color1, vec4 color2);
 
 /*
 * Creates an ellipsoid shape in 3D.
@@ -42,10 +43,11 @@ vector<Vertex> createCuboid(float width, float height, float depth, vec4 color);
 * @param ry - The y component of the radius (height).
 * @param rz - The z component of the radius (depth).
 * @param precision - Defines the smoothness of the shape (higher precision means smoother surface).
-* @param color - The color of the shape.
-* @return A vector of vertices.
+* @param color1 - The first color of the shape.
+* @param color2 - The second color of the shape.
+* @return A vector of vertices and a vector of indexes.
 */
-vector<Vertex> createEllipsoid(float rx, float ry, float rz, int precision, vec4 color);
+pair<vector<Vertex>, vector<GLuint>> createEllipsoid(float rx, float ry, float rz, int precision, vec4 color1, vec4 color2);
 
 /*
 * Creates a pyramid shape in 3D.
@@ -53,7 +55,8 @@ vector<Vertex> createEllipsoid(float rx, float ry, float rz, int precision, vec4
 * @param rx - The x component of the radius (width).
 * @param ry - The y component of the radius (height).
 * @param rz - The z component of the radius (depth).
-* @param color - The color of the shape.
-* @return A vector of vertices.
+* @param color1 - The first color of the shape.
+* @param color2 - The second color of the shape.
+* @return A vector of vertices and a vector of indexes.
 */
-vector<Vertex> createPyramid(float width, float height, float depth, vec4 color);
+pair<vector<Vertex>, vector<GLuint>> createPyramid(float width, float height, float depth, vec4 color1, vec4 color2);

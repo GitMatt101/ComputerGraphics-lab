@@ -10,13 +10,6 @@
 void initShapeVAO(Shape* shape);
 
 /*
-* Updates the VAO of a given shape.
-*
-* @param shape - The shape.
-*/
-void updateShapeVAO(Shape* shape);
-
-/*
 * Initializes the text VAO of the program.
 *
 * @param textVAO - The text VAO.

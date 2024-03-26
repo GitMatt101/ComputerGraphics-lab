@@ -14,10 +14,3 @@ struct Perspective {
 	float nearPlane;
 	float farPlane;
 };
-
-struct Character {
-	unsigned int textureID; // ID handle of the glyph texture
-	ivec2 size;				// Size of glyph
-	ivec2 Bearing;			// Offset from baseline to left/top of glyph
-	unsigned int advance;   // Horizontal offset to advance to next glyph
-};

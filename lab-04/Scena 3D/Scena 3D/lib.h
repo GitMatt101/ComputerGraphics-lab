@@ -8,6 +8,7 @@
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
+#include <string>
 #include "utilities.h"
 using namespace glm;
 using namespace std;
